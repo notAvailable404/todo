@@ -5,12 +5,14 @@ on:
     tags:
       - 'v*' # Triggers when you push a tag starting with 'v'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # This runs two separate builds at the same time
         os: [ubuntu-latest, windows-latest]
 
     steps:
