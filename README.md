@@ -1,4 +1,4 @@
-# TODO-PY `v0.4.6`
+# TODO-PY `v0.4.7`
 
 A minimalist, terminal-based task manager written in Python. No bloat, no complex databases—just a single script and a CSV file.
 
