@@ -1,0 +1,46 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers when you push a tag starting with 'v'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # This runs two separate builds at the same time
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Nuitka and Dependencies
+        run: |
+          pip install nuitka
+
+      - name: Compile with Nuitka (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          python -m nuitka --standalone --onefile --output-filename=todo-windows todo.py
+
+      - name: Compile with Nuitka (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          python -m nuitka --standalone --onefile --output-filename=todo-linux todo.py
+
+      - name: Upload Binaries to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            todo-windows.exe
+            todo-linux
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
