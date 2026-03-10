@@ -1,4 +1,4 @@
-# TODO-PY `v0.4.7`
+# TODO-PY `v0.4.9`
 
 A minimalist, terminal-based task manager written in Python. No bloat, no complex databases—just a single script and a CSV file.
 
@@ -40,6 +40,8 @@ python todo.py
 | `c` | **Clear** the screen | `c` |
 | `h` | Show **Help** menu | `h` |
 | `q` | **Quit** | `q` |
+
+The `tasks.csv` file got a update, now it uses `"Task name",0` instead of just `Task name, False` which was much brittler
 
 ---
 
