@@ -12,7 +12,7 @@ else:
     def clear_screen(): print("\033[H\033[J", end="", flush=True)
 
 # CONFIG
-APP_VERSION = "v0.4.5"
+APP_VERSION = "v0.4.6"
 LOGO = """
  .      ::::::::::: ::::::::  :::::::::   ::::::::      .
     ,      :+:    :+:    :+: :+:    :+: :+:    :+:   *
