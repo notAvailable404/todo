@@ -3,7 +3,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*' # Triggers when you push a tag starting with 'v'
+      - 'v*'
 
 permissions:
   contents: write
@@ -26,17 +26,17 @@ jobs:
 
       - name: Install Nuitka and Dependencies
         run: |
-          pip install nuitka
+          pip install "nuitka[onefile]" zstandard
 
       - name: Compile with Nuitka (Windows)
         if: runner.os == 'Windows'
         run: |
-          python -m nuitka --standalone --onefile --output-filename=todo-windows todo.py
+          python -m nuitka --standalone --onefile --assume-yes-for-downloads --output-filename=todo-windows todo.py
 
       - name: Compile with Nuitka (Linux)
         if: runner.os == 'Linux'
         run: |
-          python -m nuitka --standalone --onefile --output-filename=todo-linux todo.py
+          python -m nuitka --standalone --onefile --assume-yes-for-downloads --output-filename=todo-linux todo.py
 
       - name: Upload Binaries to Release
         uses: softprops/action-gh-release@v2
